@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import { useNavigate } from 'react-router-dom';
 import './landing.css'
+import Navbar from './navbar.jsx'
 
 function Landing() {
   const [count, setCount] = useState(0)
@@ -11,6 +12,7 @@ function Landing() {
 
   return (
     <>
+      <Navbar />
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
