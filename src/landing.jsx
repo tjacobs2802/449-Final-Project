@@ -37,6 +37,7 @@ function Landing() {
       </p>
 
       <button onClick={() => navigate('/user')}>Go to User Page</button>
+      <button onClick={() => navigate('/log_food')}>Go to Log Food Page</button>
 
     </>
   )
