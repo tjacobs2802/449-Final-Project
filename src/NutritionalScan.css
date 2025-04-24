@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+
+@theme {
+    --color-pine: #09725F;
+    --color-lime: #86FF70;
+    --color-white: #FFFFFF;
+    --color-orange: #FF8847;
+  }
