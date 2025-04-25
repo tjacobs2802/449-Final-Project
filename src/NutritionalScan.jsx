@@ -463,109 +463,212 @@ const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 //     );
 // };
 
+// Apple
+
+// const NutriScan = () => {
+//     const [supabase, setSupabase] = useState(null);
+//     const [message, setMessage] = useState({ type: null, text: '' });
+//     // const [user, setUser] = useState(null);  Removed user
+
+//     useEffect(() => {
+//         const initSupabase = async () => {
+//             try {
+//                 const supabaseClient = createClient(supabaseUrl, supabaseKey);
+//                 setSupabase(supabaseClient);
+//                 // const { data: { user: currentUser } } = await supabaseClient.auth.getUser();  Removed user
+//                 // setUser(currentUser);
+
+//             } catch (error) {
+//                 console.error("Error initializing Supabase:", error);
+//                 setMessage({ type: 'error', text: 'Failed to initialize Supabase. ' + error.message });
+//             }
+//         };
+//         initSupabase();
+//     }, []);
+
+//     const handleInsert = async () => {
+//         try {
+//             const { error } = await supabase
+//                 .from('entries') // Use your table name here
+//                 .insert({
+//                     label_name: 'Test Product',
+//                     user_id: '9f2e45bb-71f4-427e-8671-7614a9c2ea23', //  Removed user.id and hardcoded a test user.  Important:  Use a valid user ID from your database for testing.
+//                     calorie_amount: 120,
+//                     protein_amount: 15,
+//                 },
+//                 { upsert: false } // Explicitly set upsert to false
+//                 );
+
+//             if (error) {
+//                 console.error("Supabase error:", error);
+//                 throw new Error('Failed to insert data: ' + error.message);
+//             }
+//             setMessage({ type: 'success', text: 'Data inserted successfully!' });
+//         } catch (error) {
+//             setMessage({ type: 'error', text: error.message });
+//         }
+//     };
+
+//     return (
+//         <>
+//         <Navbar />
+//         <div className="min-h-screen p-4 sm:p-8 flex items-center justify-center">
+//             <div className="max-w-md w-full space-y-6 bg-white rounded-lg p-6 shadow-md">
+//                 <h1 className="text-2xl font-bold text-gray-900 text-center">
+//                     Supabase Insert Test
+//                 </h1>
+//                 <Button
+//                     onClick={handleInsert}
+//                     className={cn(
+//                         "w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2.5",
+//                         "transition-colors duration-300 rounded-md shadow-md",
+//                     )}
+//                 >
+//                     Insert Test Data
+//                 </Button>
+//                 {message.type && (
+//                     <div
+//                         className={cn(
+//                             "p-4 rounded-md flex items-start gap-2",
+//                             message.type === 'success'
+//                                 ? "bg-green-500/10 border border-green-400 text-green-400"
+//                                 : "bg-red-500/10 border border-red-400 text-red-400"
+//                         )}
+//                     >
+//                         {message.type === 'success' ? (
+//                             <CheckCircle className="h-5 w-5 mt-0.5 flex-shrink-0" />
+//                         ) : (
+//                             <AlertTriangle className="h-5 w-5 mt-0.5 flex-shrink-0" />
+//                         )}
+//                         <span>
+//                             {message.text}
+//                         </span>
+//                     </div>
+//                 )}
+//             </div>
+//         </div>
+//         </>
+//     );
+// };
+
 const NutriScan = () => {
-    const [supabase, setSupabase] = useState(null);
-    const [message, setMessage] = useState({ type: null, text: '' });
-    // const [user, setUser] = useState(null);  Removed user
+    const navigate = useNavigate();
 
-    useEffect(() => {
-        const initSupabase = async () => {
-            try {
-                // const supabaseUrl = 'https://vhzmoieunypoledibcqa.supabase.co';
-                // const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZoem1vaWV1bnlwb2xlZGliY3FhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ2NjYwMTMsImV4cCI6MjA2MDI0MjAxM30.qLvewkSAwcmg5-7mH10RMz2wGCUlmkz19P00nYjtuzY';
+    // const [searchType, setSearchType] = useState('food');
+    const [searchType, setSearchType] = useState('barcode');
+    const [searchValue, setSearchValue] = useState('04963406');
 
-                // if (!supabaseUrl) {
-                //     throw new Error("NEXT_PUBLIC_SUPABASE_URL is not defined in your environment.");
-                // }
-                // if (!supabaseKey) {
-                //     throw new Error("NEXT_PUBLIC_SUPABASE_ANON_KEY is not defined in your environment.");
-                // }
+    const [type, setType] = useState('food');
+    const [input, setInput] = useState('');
 
-                const supabaseClient = createClient(supabaseUrl, supabaseKey);
-                setSupabase(supabaseClient);
-                // const { data: { user: currentUser } } = await supabaseClient.auth.getUser();  Removed user
-                // setUser(currentUser);
 
-            } catch (error) {
-                console.error("Error initializing Supabase:", error);
-                setMessage({ type: 'error', text: 'Failed to initialize Supabase. ' + error.message });
-            }
-        };
-        initSupabase();
-    }, []);
-
-    const handleInsert = async () => {
-        if (!supabase) {
-            setMessage({ type: 'error', text: 'Supabase is not initialized.' });
-            return;
-        }
-        // if (!user) {  Removed user check
-        //     setMessage({ type: 'error', text: 'Please log in to save data.' });
-        //     return;
-        // }
-
+    const fetchProductInfo = async (type, value) => {
         try {
-            const { error } = await supabase
-                .from('entries') // Use your table name here
-                .insert({
-                    label_name: 'Test Product',
-                    user_id: '9f2e45bb-71f4-427e-8671-7614a9c2ea23', //  Removed user.id and hardcoded a test user.  Important:  Use a valid user ID from your database for testing.
-                    calorie_amount: 120,
-                    protein_amount: 15,
-                },
-                { upsert: false } // Explicitly set upsert to false
-                );
-
-            if (error) {
-                console.error("Supabase error:", error);
-                throw new Error('Failed to insert data: ' + error.message);
+            if (!NUTRITIONIX_API_KEY || !NUTRITIONIX_APP_ID) {
+                throw new Error('Nutritionix API key and app ID are not configured.');
             }
-            setMessage({ type: 'success', text: 'Data inserted successfully!' });
+
+            const headers = {
+                'x-app-id': NUTRITIONIX_APP_ID,
+                'x-app-key': NUTRITIONIX_API_KEY,
+                'Content-Type': 'application/json',
+            };
+
+            let url = '';
+            if (type === 'food') {
+                url = `${NUTRITIONIX_BASE_URL}/natural/nutrients`;  // Changed endpoint
+                const postBody = {
+                    query: value
+                }
+                const response = await fetch(url, {
+                    method: 'POST',  // Changed to POST
+                    headers: headers,
+                    body: JSON.stringify(postBody) //added body
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Nutritionix API error: ${response.status} - ${response.statusText}`);
+                }
+                const data = await response.json();
+                console.log("Full response:", data);
+
+            } else if (type === 'barcode') {
+                url = `${NUTRITIONIX_BASE_URL}/search/item?upc=${value}`;
+                
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: headers
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Nutritionix API error: ${response.status} - ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                console.log("Full response:", data);
+
+            } else {
+                throw new Error('Invalid search type.');
+            }
+
         } catch (error) {
-            setMessage({ type: 'error', text: error.message });
+            console.error("Error fetching product info:", error);
         }
+    };
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // fetchProductInfo(searchType, searchValue);
     };
 
     return (
         <>
-        <Navbar />
-        <div className="min-h-screen p-4 sm:p-8 flex items-center justify-center">
-            <div className="max-w-md w-full space-y-6 bg-white rounded-lg p-6 shadow-md">
-                <h1 className="text-2xl font-bold text-gray-900 text-center">
-                    Supabase Insert Test
-                </h1>
-                <Button
-                    onClick={handleInsert}
-                    className={cn(
-                        "w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2.5",
-                        "transition-colors duration-300 rounded-md shadow-md",
-                    )}
-                >
-                    Insert Test Data
-                </Button>
-                {message.type && (
-                    <div
-                        className={cn(
-                            "p-4 rounded-md flex items-start gap-2",
-                            message.type === 'success'
-                                ? "bg-green-500/10 border border-green-400 text-green-400"
-                                : "bg-red-500/10 border border-red-400 text-red-400"
-                        )}
-                    >
-                        {message.type === 'success' ? (
-                            <CheckCircle className="h-5 w-5 mt-0.5 flex-shrink-0" />
-                        ) : (
-                            <AlertTriangle className="h-5 w-5 mt-0.5 flex-shrink-0" />
-                        )}
-                        <span>
-                            {message.text}
-                        </span>
-                    </div>
-                )}
-            </div>
-        </div>
+            <Navbar />
+
+
+            <form onSubmit={handleSubmit} className="max-w-md w-[350px] mx-auto bg-gray-50 shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                <div className="mb-4">
+                    <Label htmlFor="searchType" className="block text-gray-700 text-sm font-bold mb-2"> Search By</Label>
+                        <Select value={searchType} onValueChange={setSearchType}>
+                            <SelectTrigger className="w-full text-black">
+                                <SelectValue placeholder="Select search type" />
+                            </SelectTrigger>
+                            <SelectContent className=" bg-gray-50 text-black">
+                                <SelectItem value="barcode">Barcode</SelectItem>
+                                <SelectItem value="food">Natural Language</SelectItem>
+                            </SelectContent>
+                        </Select>
+                </div>
+
+                <div className="mb-6">
+                    <Label htmlFor="searchValue" className="block text-gray-700 text-sm font-bold mb-2">
+                        {searchType === 'barcode' ? 'Barcode' : 'Food Name'}
+                    </Label>
+                    <Input
+                        id="searchValue"
+                        type="text"
+                        placeholder={searchType === 'barcode' ? 'Enter barcode' : 'Enter food name (e.g., chicken breast)'}
+                        value=""
+                        onChange={(e) => setSearchValue(e.target.value)}
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    />
+                </div>
+
+                <div className="flex items-center justify-center">
+                    <Button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        <Search className="mr-2 h-4 w-4" /> Submit
+                    </Button>
+                </div>
+            </form>
+
+            <button onClick={() => navigate("/")} className="text-white-500 text-sm mt-4">
+                Go to Home Page
+            </button>
         </>
     );
 };
+
+
 
 export default NutriScan;
