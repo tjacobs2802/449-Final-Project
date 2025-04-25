@@ -9,6 +9,12 @@ function Navbar() {
               Health and Wellness Tracker
             </span>
           </a>
+          <div className="flex space-x-4 ml-auto">
+            <a href="/" className = "text-white dark:text-white hover:underline">Home</a>
+            <a href="/user" className = "text-white dark:text-white hover:underline">Profile</a>
+            <a href="/log_food" className = "text-white dark:text-white hover:underline">Food Log</a>
+            <a href="/user" className = "text-white dark:text-white hover:underline">Leaderboard</a>
+          </div>
         </div>
       </nav>
     );
