@@ -7,3 +7,9 @@
     --color-white: #FFFFFF;
     --color-orange: #FF8847;
   }
+
+
+.errorMessage {
+  color: red;
+  margin-top: 20px;
+}
