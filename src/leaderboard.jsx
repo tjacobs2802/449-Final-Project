@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 // Import the supabase client from your separate file
 import { supabase } from './supabaseClient'; // Adjust the path if needed
 import { Link } from 'react-router-dom'; // Assuming you're using react-router for navigation
+import Navbar from './navbar.jsx'
 
 function Leaderboard() {
 
@@ -35,22 +36,7 @@ function Leaderboard() {
   return (
     <div className="min-h-screen font-['Inter']">
       {/* Navbar */}
-      <nav className="bg-[#09725F] p-4 flex items-center justify-between">
-        <div className="text-white text-2xl font-bold font-['Poetsen_One']">
-          NutriScan
-        </div>
-        <div className="space-x-4">
-          <Link to="/" className="text-white hover:text-[#FF8847] text-lg font-semibold">
-            Home
-          </Link>
-          <Link to="/leaderboard" className="text-white hover:text-[#FF8847] text-lg font-semibold">
-            Leaderboard
-          </Link>
-          <Link to="/profile" className="text-white hover:text-[#FF8847] text-lg font-semibold">
-            Profile
-          </Link>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Leaderboard Content */}
       <div className="w-full px-4 py-10 sm:px-8 md:px-12">
