@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import './leaderboard.css';
-import Navbar from './navbar.jsx';
-import { createClient } from "@supabase/supabase-js";
-
-const supabaseUrl = 'https://vhzmoieunypoledibcqa.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZoem1vaWV1bnlwb2xlZGliY3FhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ2NjYwMTMsImV4cCI6MjA2MDI0MjAxM30.qLvewkSAwcmg5-7mH10RMz2wGCUlmkz19P00nYjtuzY';
-const supabase = createClient(supabaseUrl, supabaseKey);
+// Import the supabase client from your separate file
+import { supabase } from './supabaseClient'; // Adjust the path if needed
+import { Link } from 'react-router-dom'; // Assuming you're using react-router for navigation
 
 function Leaderboard() {
+
   const [leaderboardData, setLeaderboardData] = useState([]);
-  
+
   useEffect(() => {
     const fetchLeaderboardData = async () => {
       const { data, error } = await supabase.from('leaderboard').select('*');
-      
+
       if (error) {
         console.error('Error fetching leaderboard data:', error);
       } else {
@@ -36,32 +33,59 @@ function Leaderboard() {
   });
 
   return (
-    <>
-      <Navbar />
-      <div className="leaderboard-container">
-        <h1 className="leaderboard-title">LeaderBoard</h1>
-        
-        <div className="leaderboard-table">
-          <div className="leaderboard-header">
-            <div className="header-cell rank-header"></div>
-            <div className="header-cell player-header">Player</div>
-            <div className="header-cell score-header">Score</div>
-            <div className="header-cell streak-header">Streak Count</div>
-            <div className="header-cell date-header">Date</div>
+    <div className="min-h-screen font-['Inter']">
+      {/* Navbar */}
+      <nav className="bg-[#09725F] p-4 flex items-center justify-between">
+        <div className="text-white text-2xl font-bold font-['Poetsen_One']">
+          NutriScan
+        </div>
+        <div className="space-x-4">
+          <Link to="/" className="text-white hover:text-[#FF8847] text-lg font-semibold">
+            Home
+          </Link>
+          <Link to="/leaderboard" className="text-white hover:text-[#FF8847] text-lg font-semibold">
+            Leaderboard
+          </Link>
+          <Link to="/profile" className="text-white hover:text-[#FF8847] text-lg font-semibold">
+            Profile
+          </Link>
+        </div>
+      </nav>
+
+      {/* Leaderboard Content */}
+      <div className="w-full px-4 py-10 sm:px-8 md:px-12">
+        <h1 className="text-[#FF8847] text-4xl md:text-5xl font-bold text-center mb-12 font-['Poetsen_One']">
+          LeaderBoard
+        </h1>
+
+        <div className="w-full max-w-full overflow-x-auto">
+          {/* Header Row */}
+          <div className="flex bg-[#09725F] text-white rounded-t-xl">
+            <div className="w-16 md:w-24 py-6 text-center font-bold text-lg"></div>
+            <div className="w-1/4 py-6 text-center font-bold text-lg md:text-xl">Player</div>
+            <div className="w-1/4 py-6 text-center font-bold text-lg md:text-xl">Score</div>
+            <div className="w-1/4 py-6 text-center font-bold text-lg md:text-xl">Streak Count</div>
+            <div className="w-1/4 py-6 text-center font-bold text-lg md:text-xl">Date</div>
           </div>
-          
+
+          {/* Data Rows */}
           {displayData.slice(0, 10).map((entry, index) => (
-            <div className="leaderboard-row" key={index}>
-              <div className="rank-cell">#{index + 1}</div>
-              <div className="player-cell">{entry.player_name}</div>
-              <div className="score-cell">{entry.score}</div>
-              <div className="streak-cell">{entry.streak_count}</div>
-              <div className="date-cell">{entry.date}</div>
+            <div 
+              key={index} 
+              className="flex bg-[#86FF70] border border-gray-700 rounded-xl mb-4 items-center h-20"
+            >
+              <div className="w-16 md:w-24 text-center font-['Poetsen_One'] text-[#FF8847] text-2xl font-bold">
+                #{index + 1}
+              </div>
+              <div className="w-1/4 text-center text-lg md:text-xl">{entry.player_name}</div>
+              <div className="w-1/4 text-center text-lg md:text-xl">{entry.score}</div>
+              <div className="w-1/4 text-center text-lg md:text-xl">{entry.streak_count}</div>
+              <div className="w-1/4 text-center text-lg md:text-xl">{entry.date}</div>
             </div>
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
