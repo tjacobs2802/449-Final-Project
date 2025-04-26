@@ -65,28 +65,29 @@ function User() {
   return (
     <>
       <Navbar />
-      <div className='container flex float-left'>
-        <div className='profile flex-1'>
+      <div className='container flex gap-30 text-left'>
+        <div className='profile flex-1 text-left'>
           <img src={EmptyProfile} class='h-auto max-w-80 rounded-full' alt="React logo" />
           {currentUser ? (
             <>
-              <p className='text-4xl text-orange'>Hello, {currentUser.name}!</p>
-              <p className='text-4xl text-lime'>User Information</p>
-              <p className='text-2xl text-pine'>Height: {currentUser.height}</p>
-              <p className='text-2xl text-pine'>Weight: {currentUser.weight}</p>
-              <p className='text-2xl text-pine'>Target Weight: {currentUser.target_weight}</p>
-              <p className='text-2xl text-pine'>AVG Miles Walked/Week: {currentUser.average_miles}</p>
-              <p className='text-2xl text-pine'>AVG Calories Consumed/Day: {currentUser.average_calories}</p>
+              <div className='space-y-4'>             
+                <p className='text-4xl text-orange font-bold'>Hello, {currentUser.name}!</p>
+                <p className='text-2xl text-lime font-bold'>User Information</p>
+                <p className='text-2xl text-pine italic'>Height: {currentUser.height}</p>
+              </div>
+              <p className='text-2xl text-pine italic'>Weight: {currentUser.weight}</p>
+              <p className='text-2xl text-pine italic'>Target Weight: {currentUser.target_weight}</p>
+              <p className='text-2xl text-pine italic'>AVG Miles Walked/Week: {currentUser.average_miles}</p>
+              <p className='text-2xl text-pine italic'>AVG Calories Cons./Day: {currentUser.average_calories}</p>
             </>
           ) : (
             <p className='text-xl'>Loading user data...</p>
           )}
-          <button onClick={() => navigate('/')}>Go to Home Page</button>
         </div>
         <div className='graph-achievement' class='flex-1, flexbox'>
-          <div className='graph'>
-            <h2 className='text-3xl text-lime'>Calorie Intake Graph</h2>
-            <ResponsiveContainer width="100%" height={300}>
+          <div className='graph w-full space-y-8'>
+            <p className='text-3xl text-lime text-left font-bold'>Calorie Intake Graph: Last 7 Days</p>
+            <ResponsiveContainer width="110%" height={350}>
               <BarChart data={calorieData}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" />
@@ -97,24 +98,54 @@ function User() {
               </BarChart>
             </ResponsiveContainer>
           </div>
-          <div className='achievements'>
-            <h2 class='text-3xl text-lime'>Achievements</h2>
-            <div class='grid grid-cols-6 gap-4'>
-              <img src={Trophy} class='h-auto max-w-10' alt="React logo" />
-              <img src={Trophy} class='h-auto max-w-10' alt="React logo" />
-              <img src={Trophy} class='h-auto max-w-10' alt="React logo" />
-              <img src={Trophy} class='h-auto max-w-10' alt="React logo" />
-              <img src={Trophy} class='h-auto max-w-10' alt="React logo" />
-              <img src={Trophy} class='h-auto max-w-10' alt="React logo" />
-              <img src={Trophy} class='h-auto max-w-10' alt="React logo" />
-              <img src={Trophy} class='h-auto max-w-10' alt="React logo" />
-              <img src={Trophy} class='h-auto max-w-10' alt="React logo" />
-              <img src={Trophy} class='h-auto max-w-10' alt="React logo" />
+          <div className='achievements font-bold space-y-8'>
+            <p class='text-3xl text-lime text-left '>Achievements</p>
+            <div class='grid grid-cols-6 gap-15'>
+            <div className='flex flex-col items-center'>
+              <img src={Trophy} className='h-auto max-w-15' alt="Trophy" />
+              <p className='text-sm text-center font-bold'>Daily Walker I</p>
             </div>
-
+            <div className='flex flex-col items-center'>
+              <img src={Trophy} className='h-auto max-w-15' alt="Trophy" />
+              <p className='text-sm text-center font-bold'>Healthy Eater I</p>
+            </div>
+            <div className='flex flex-col items-center'>
+              <img src={Trophy} className='h-auto max-w-15' alt="Trophy" />
+              <p className='text-sm text-center font-bold'>Daily Login I</p>
+            </div>
+            <div className='flex flex-col items-center'>
+              <img src={Trophy} className='h-auto max-w-15' alt="Trophy" />
+              <p className='text-sm text-center font-bold'>Daily Login II</p>
+            </div>
+            <div className='flex flex-col items-center'>
+              <img src={Trophy} className='h-auto max-w-15' alt="Trophy" />
+              <p className='text-sm text-center font-bold'>Bulking Up! I</p>
+            </div>
+            <div className='flex flex-col items-center'>
+              <img src={Trophy} className='h-auto max-w-15' alt="Trophy" />
+              <p className='text-sm text-center font-bold'>Daily Walker II</p>
+            </div>
+            <div className='flex flex-col items-center'>
+              <img src={Trophy} className='h-auto max-w-15' alt="Trophy" />
+              <p className='text-sm text-center font-bold'>Healthy Eater II</p>
+            </div>
+            <div className='flex flex-col items-center'>
+              <img src={Trophy} className='h-auto max-w-15' alt="Trophy" />
+              <p className='text-sm text-center font-bold'>Daily Login III</p>
+            </div>
+            <div className='flex flex-col items-center'>
+              <img src={Trophy} className='h-auto max-w-15' alt="Trophy" />
+              <p className='text-sm text-center font-bold'>Bulking Up! II</p>
+            </div>
+            <div className='flex flex-col items-center'>
+              <img src={Trophy} className='h-auto max-w-15' alt="Trophy" />
+              <p className='text-sm text-center font-bold'>Calorie Burner I</p>
+            </div>                                   
           </div>
+
         </div>
       </div>
+    </div>
 
     </>
   )
