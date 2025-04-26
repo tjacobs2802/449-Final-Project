@@ -12,6 +12,8 @@ const supabaseUrl = 'https://vhzmoieunypoledibcqa.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZoem1vaWV1bnlwb2xlZGliY3FhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ2NjYwMTMsImV4cCI6MjA2MDI0MjAxM30.qLvewkSAwcmg5-7mH10RMz2wGCUlmkz19P00nYjtuzY';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
+const poet = { fontFamily: "'Poetsen One', sans-serif" };
+const inter = { fontFamily: "'Inter', sans-serif" };
 
 
 function User() {
@@ -66,13 +68,13 @@ function User() {
     <>
       <Navbar />
       <div className='container flex gap-30 text-left'>
-        <div className='profile flex-1 text-left'>
+        <div className='inter-font profile flex-1 text-left'>
           <img src={EmptyProfile} class='h-auto max-w-80 rounded-full' alt="React logo" />
           {currentUser ? (
             <>
               <div className='space-y-4'>             
-                <p className='text-4xl text-orange font-bold'>Hello, {currentUser.name}!</p>
-                <p className='text-2xl text-lime font-bold'>User Information</p>
+                <p className='poetsen-font text-4xl text-orange font-bold'>Hello, {currentUser.name}!</p>
+                <p className='text-2xl text-lime font-bold' >User Information</p>
                 <p className='text-2xl text-pine italic'>Height: {currentUser.height}</p>
               </div>
               <p className='text-2xl text-pine italic'>Weight: {currentUser.weight}</p>
@@ -84,7 +86,7 @@ function User() {
             <p className='text-xl'>Loading user data...</p>
           )}
         </div>
-        <div className='graph-achievement' class='flex-1, flexbox'>
+        <div className='inter-font graph-achievement' class='flex-1, flexbox'>
           <div className='graph w-full space-y-8'>
             <p className='text-3xl text-lime text-left font-bold'>Calorie Intake Graph: Last 7 Days</p>
             <ResponsiveContainer width="110%" height={350}>

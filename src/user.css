@@ -7,3 +7,12 @@
     --color-white: #FFFFFF;
     --color-orange: #FF8847;
   }
+
+  .poetsen-font {
+    font-family: 'Poetsen One', sans-serif;
+  }
+
+  .inter-font {
+    font-family: 'Inter', sans-serif;
+  }
+  

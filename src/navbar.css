@@ -1,7 +1,12 @@
 @import "tailwindcss";
 
+@font-face{
+  font-family: Poet;
+  src: url("../src/assets/fonts/PoetsenOne-Regular.ttf") format("truetype");
+}
 
 @theme {
+    --font-poet: Poet, "sans-serif";
     --color-pine: #09725F;
     --color-lime: #86FF70;
     --color-white: #FFFFFF;
