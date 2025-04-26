@@ -1,0 +1,114 @@
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+/* Base styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.leaderboard-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Title styles */
+.leaderboard-title {
+  font-family: 'Poetsen One', sans-serif;
+  color: #FF7F50; /* Orange color from the wireframe */
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+/* Leaderboard table styles */
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.leaderboard-header {
+  display: flex;
+  background-color: #2F4F4F; /* Dark green color for header */
+  color: white;
+  font-weight: bold;
+  border-radius: 8px 8px 0 0;
+}
+
+.header-cell {
+  padding: 12px;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.rank-header {
+  width: 10%;
+}
+
+.player-header {
+  width: 30%;
+}
+
+.score-header {
+  width: 20%;
+}
+
+.streak-header {
+  width: 20%;
+}
+
+.date-header {
+  width: 20%;
+}
+
+/* Row styles */
+.leaderboard-row {
+  display: flex;
+  background-color: #9DFF9D; /* Light green color for rows */
+  border: 1px solid #333;
+  margin-bottom: 5px;
+  border-radius: 8px;
+}
+
+.rank-cell {
+  width: 10%;
+  padding: 12px;
+  text-align: center;
+  font-family: 'Poetsen One', sans-serif;
+  color: #FF7F50; /* Orange color for rank numbers */
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.player-cell, .score-cell, .streak-cell, .date-cell {
+  padding: 12px;
+  text-align: center;
+  width: 22.5%;
+}
+
+/* Make sure the table fits well on all screen sizes */
+@media (max-width: 768px) {
+  .leaderboard-table {
+    font-size: 0.9rem;
+  }
+  
+  .header-cell, .rank-cell {
+    font-size: 1rem;
+  }
+  
+  .leaderboard-title {
+    font-size: 2rem;
+  }
+}
+
+/* Match the dark green header from the wireframe */
+:root {
+  --header-bg: #018169;
+  --orange-text: #FF7F50;
+  --row-bg: #9DFF9D;
+  --lime-green: #32CD32;
+  --pine-green: #01796F;
+}
