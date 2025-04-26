@@ -11,7 +11,7 @@ function Navbar() {
             <a href="/" className = "text-white dark:text-white hover:underline">Home</a>
             <a href="/user" className = "text-white dark:text-white hover:underline">Profile</a>
             <a href="/log_food" className = "text-white dark:text-white hover:underline">Food Log</a>
-            <a href="/leaderboard" className = "text-white dark:text-white hover:underline">Leaderboard</a>
+            <a href="/user" className = "text-white dark:text-white hover:underline">Leaderboard</a>
           </div>
         </div>
       </nav>
