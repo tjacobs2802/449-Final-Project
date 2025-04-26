@@ -10,9 +10,6 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js"
 
 import { supabase } from './supabaseClient'; // Adjust the path if needed
 
-const poet = { fontFamily: "'Poetsen One', sans-serif" };
-const inter = { fontFamily: "'Inter', sans-serif" };
-
 
 function User() {
   const navigate = useNavigate();
@@ -92,7 +89,6 @@ function User() {
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" />
                 <YAxis />
-                <Tooltip />
                 <Legend />
                 <Bar dataKey="calories" fill='orange' />
               </BarChart>
