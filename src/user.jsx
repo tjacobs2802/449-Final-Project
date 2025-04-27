@@ -15,18 +15,30 @@ function User() {
   const navigate = useNavigate();
   const [profiles, setProfiles] = useState([]);
   const [calorieData, setCalorieData] = useState([]);
-  
+  const userId = localStorage.getItem("user_id");
+
   useEffect(() => {
     const fetchProfiles = async () => {
-      const { data, error } = await supabase.from('profiles').select('*');
-      console.log('Fetched profiles:', data);
+      if (!userId) {
+        console.error("No user_id found in localStorage");
+        return;
+      }
+  
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("user_id", userId)
+        .single();
+  
       if (error) {
-        console.error('Error fetching profiles:', error);
+        console.error("Error fetching user profile:", error);
       } else {
+        console.log("Fetched user profile:", data);
         setProfiles(data);
       }
     };
-
+  
+  
 
     const fetchCalorieIntake = async () => {
       const { data, error } = await supabase.from('calorie_intake').select('*');
@@ -58,7 +70,7 @@ function User() {
     fetchCalorieIntake();
   }, []);
 
-  const currentUser = profiles[0];
+  const currentUser = profiles;
   return (
     <>
       <Navbar />
