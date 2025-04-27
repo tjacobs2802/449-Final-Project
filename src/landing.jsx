@@ -3,16 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import './landing.css'
 import Navbar from './navbar.jsx'
 
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 
 import { supabase } from './supabaseClient';
 
 function Landing() {
     const navigate = useNavigate();
 
-    // const [count, setCount] = useState(0)
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -61,7 +58,7 @@ function Landing() {
                 } else {
                     const userId = data.user.id;
                     localStorage.setItem('user_id', userId);
-                    
+
                     setEmail('');
                     setUsername('');
                     setPassword('');

@@ -11,9 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Label } from '@/components/ui/label';
 import { Search } from 'lucide-react';
 
-
 import { supabase } from './supabaseClient';
-// import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
 
 const NUTRITIONIX_API_KEY = '7885b37e01eaaf56004dc57f44556af0';
 const NUTRITIONIX_APP_ID = '04660f3c';
@@ -148,7 +146,7 @@ const NutriScan = () => {
                         .insert([
                             {
                         
-                                user_id: userId, // Hardcoded user_id value
+                                user_id: userId,
                                 food_name: manualFoodName,
                                 calories: manualCalories,
                                 protein: manualProtein,
