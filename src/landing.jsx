@@ -1,40 +1,116 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import { useNavigate } from 'react-router-dom';
 import './landing.css'
 import Navbar from './navbar.jsx'
 
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+
+import { supabase } from './supabaseClient';
+
 function Landing() {
-  const [count, setCount] = useState(0)
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
+    // const [count, setCount] = useState(0)
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const [isLogin, setIsLogin] = useState(true);
 
-  return (
-    <>
-      <Navbar />
-      <h1 className='text-orange poetsen-font'>Track your health!</h1>
-      <h2 className='text-pine font-bold'>Track fitness, nutrition, and health goals by completing daily and weekly tasks for rewards!</h2>
-      <div className = "login-container">
-        <div className = "log-box text-lime">
-        <h2>Login/Sign up</h2>
-        <input type="text" placeholder="E-mail"/>
-        <input type="text" placeholder="Username"/>
-        <input type="password" placeholder = "Password"/>
-        <button className='text-pine'>Login</button>
-        <button className='text-pine'>Sign Up</button>
-        </div>
-      </div>
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (isLogin) {
+            // Handle Login
+            try {
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email,
+                    password,
+                });
+                if (error) {
+                    setErrorMessage(error.message);
+                } else {
+                    setEmail('');
+                    setUsername('');
+                    setPassword('');
+                    
+                    alert('Login Successful');
+                    navigate('/user');
+                }
+            } catch (err) {
+                setErrorMessage(err.message || 'An error occurred during login');
+            }
+        } else {
+            // Handle Sign Up
+            try {
+                const { data, error } = await supabase.auth.signUp({
+                    email,
+                    password,
+                    options: {
+                        emailRedirectTo: typeof window !== 'undefined' ? window.location.origin : '',
+                        data: { display_name: username}
+                    },
+                });
+                
+                if (error) {
+                    setErrorMessage(error);
+                } else {
+                    setEmail('');
+                    setUsername('');
+                    setPassword('');
 
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+                    alert('Sign up Successful');
+                    navigate('/user');
+                }
+            } catch (err) {
+                setErrorMessage(err.message || 'An error occurred during sign up');
+            }
+        }
 
-      <button onClick={() => navigate('/user')}>Go to User Page</button>
-      <button onClick={() => navigate('/log_food')}>Go to Log Food Page</button>
+    };
 
-    </>
-  )
-}
+    return (
+        <>
+            <Navbar />
+            <h1 className='text-orange poetsen-font'>Track your health!</h1>
+            <h2 className='text-pine font-bold'>Track fitness, nutrition, and health goals by completing daily and weekly tasks for rewards!</h2>
+            <form className = "login-container" onSubmit={handleSubmit}>
+                <div className = "log-box text-lime">
+                    <h2>Login/Sign up</h2>
+
+                    <Input
+                        id="username"
+                        type="text"
+                        placeholder="Username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+
+                    <Input
+                        id="email"
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+
+                    <Input
+                        id="password"
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                
+                    <button type="submit" className='text-pine' onClick={() => setIsLogin(true)}>Login</button>
+                    <button type="submit" className='text-pine' onClick={() => setIsLogin(false)}>Sign Up</button>
+
+                    {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+                </div>
+            </form>
+        </>
+  );
+};
 
 export default Landing

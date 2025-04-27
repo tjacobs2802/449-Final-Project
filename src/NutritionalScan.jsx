@@ -50,8 +50,6 @@ const NutriScan = () => {
 
             let url = '';
             if (type === 'food') {
-                // console.log("Trying Natural Language");
-
                 url = `${NUTRITIONIX_BASE_URL}/natural/nutrients`;
                 const postBody = {
                     query: value
@@ -69,13 +67,10 @@ const NutriScan = () => {
                 }
 
                 const data = await response.json();
-                console.log("Full response:", data);
 
                 return data;
 
             } else if (type === 'barcode') {
-                // console.log("Trying Barcode");
-
                 url = `${NUTRITIONIX_BASE_URL}/search/item?upc=${value}`;
                 
                 const response = await fetch(url, {
@@ -89,7 +84,6 @@ const NutriScan = () => {
                 }
 
                 const data = await response.json();
-                console.log("Full response:", data);
                 return data;
 
             } else {
@@ -97,7 +91,7 @@ const NutriScan = () => {
             }
 
         } catch (error) {
-            console.error("Error fetching product info:", error);
+            setErrorMessage('Error');
         }
     };
 
@@ -108,9 +102,6 @@ const NutriScan = () => {
             try {
 
                 const data = await fetchFoodData(searchType, searchValue);
-
-                console.log(data);
-
 
                 if (data && data.foods.length > 0) {
                     let totalCalories = 0;
@@ -188,7 +179,7 @@ const NutriScan = () => {
     return (
         <>
             <Navbar />
-            <p className='poetsen-font text-4xl text-orange'>Input Food Label Data in One of the Following Options:</p>
+            <p className='poetsen-font text-4xl text-orange mb-10'>Input Food Label Data in One of the Following Options:</p>
             <form onSubmit={handleSubmit} className="max-w-md w-[350px]  mx-auto bg-gray-50 shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div className="mb-4">
                     <Label className="block text-gray-700 text-sm font-bold mb-2">Entry Type</Label>
@@ -233,7 +224,7 @@ const NutriScan = () => {
                         </div>
 
                         <div className="flex items-center justify-center">
-                            <Button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                            <Button type="submit" className="bg-black hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline submit-button">
                                 <Search className="mr-2 h-4 w-4" /> Lookup
                             </Button>
                         </div>
@@ -313,7 +304,7 @@ const NutriScan = () => {
                         </div>
 
                         <div className="flex items-center justify-center">
-                            <Button type="submit" className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                            <Button type="submit" className="bg-black hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline submit-button">
                                 Submit Entry
                             </Button>
                         </div>

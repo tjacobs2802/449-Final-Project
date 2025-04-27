@@ -53,3 +53,7 @@ h2{
   font-size: 22px;
   max-width: 500px;
 }
+
+.submit-button {
+  background: #333337;
+}
