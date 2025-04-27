@@ -31,6 +31,9 @@ function Landing() {
                 if (error) {
                     setErrorMessage(error.message);
                 } else {
+                    const userId = data.user.id;
+                    localStorage.setItem('user_id', userId);
+
                     setEmail('');
                     setUsername('');
                     setPassword('');
@@ -56,6 +59,9 @@ function Landing() {
                 if (error) {
                     setErrorMessage(error);
                 } else {
+                    const userId = data.user.id;
+                    localStorage.setItem('user_id', userId);
+                    
                     setEmail('');
                     setUsername('');
                     setPassword('');

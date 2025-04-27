@@ -141,13 +141,14 @@ const NutriScan = () => {
             ) {
 
                 try {
+                    const userId = localStorage.getItem('user_id');
                     
                     const { error: insertError } = await supabase
                         .from('entries')
                         .insert([
                             {
                         
-                                user_id: '9f2e45bb-71f4-427e-8671-7614a9c2ea23', // Hardcoded user_id value
+                                user_id: userId, // Hardcoded user_id value
                                 food_name: manualFoodName,
                                 calories: manualCalories,
                                 protein: manualProtein,
