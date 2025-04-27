@@ -3,7 +3,7 @@ import React from 'react'
 function Navbar() {
     return (
       <nav className="bg-pine fixed w-full z-20 top-0 start-0">
-        <div className="max-w-screen-xl flex flex-wrap justify-between mx-auto p-4">
+        <div className="flex flex-wrap justify-between mx-auto p-4">
           <span className="text-orange self-center text-3xl dark:text-white" style={{ fontFamily: "'Poetsen One', sans-serif" }}>
             Health and Wellness Tracker
           </span>
