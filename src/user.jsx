@@ -69,7 +69,7 @@ function User() {
             <>
               <div className='space-y-4'>             
                 <p className='poetsen-font text-4xl text-orange font-bold'>Hello, {currentUser.name}!</p>
-                <p className='text-2xl text-lime font-bold' >User Information</p>
+                <p className='text-2xl text-lime font-bold underline' >User Information</p>
                 <p className='text-2xl text-pine italic'>Height: {currentUser.height}</p>
               </div>
               <p className='text-2xl text-pine italic'>Weight: {currentUser.weight}</p>
@@ -83,7 +83,7 @@ function User() {
         </div>
         <div className='inter-font graph-achievement' class='flex-1, flexbox'>
           <div className='graph w-full space-y-8'>
-            <p className='text-3xl text-lime text-left font-bold'>Calorie Intake Graph: Last 7 Days</p>
+            <p className='text-3xl text-lime text-left font-bold underline'>Calorie Intake Graph: Last 7 Days</p>
             <ResponsiveContainer width="110%" height={350}>
               <BarChart data={calorieData}>
                 <CartesianGrid strokeDasharray="3 3" />
@@ -95,7 +95,7 @@ function User() {
             </ResponsiveContainer>
           </div>
           <div className='achievements font-bold space-y-8'>
-            <p class='text-3xl text-lime text-left '>Achievements</p>
+            <p class='text-3xl text-lime text-left underline'>Achievements</p>
             <div class='grid grid-cols-6 gap-15'>
             <div className='flex flex-col items-center'>
               <img src={Trophy} className='h-auto max-w-15' alt="Trophy" />
