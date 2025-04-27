@@ -276,7 +276,7 @@ const NutriScan = () => {
 
                         <div className="mb-4">
                             <Label htmlFor="sugar" className="block text-gray-700 text-sm font-bold mb-2">
-                                Sugar Amount (g)
+                                Sugars (g)
                             </Label>
                             <Input
                                 id="sugar"
@@ -290,7 +290,7 @@ const NutriScan = () => {
 
                         <div className="mb-4">
                             <Label htmlFor="fat" className="block text-gray-700 text-sm font-bold mb-2">
-                                Fat Amount (g)
+                                Fats (g)
                             </Label>
                             <Input
                                 id="fat"
