@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from 'react';
 // Import the supabase client from your separate file
 import { supabase } from './supabaseClient'; // Adjust the path if needed
-import { Link } from 'react-router-dom'; // Assuming you're using react-router for navigation
+import { Link } from 'react-router-dom';
 import Navbar from './navbar.jsx';
 
 function Leaderboard() {
-
   const [leaderboardData, setLeaderboardData] = useState([]);
 
   useEffect(() => {
     const fetchLeaderboardData = async () => {
-      const { data, error } = await supabase.from('leaderboard').select('*');
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('name, Score, Streak, Date');
 
       if (error) {
         console.error('Error fetching leaderboard data:', error);
       } else {
         console.log('Fetched leaderboard data:', data);
-        // Sort data by score in descending order
-        const sortedData = data ? data.sort((a, b) => b.score - a.score) : [];
+        // Sort data by Score descending
+        const sortedData = data ? data.sort((a, b) => b.Score - a.Score) : [];
         setLeaderboardData(sortedData);
       }
     };
@@ -25,20 +26,18 @@ function Leaderboard() {
     fetchLeaderboardData();
   }, []);
 
-  // Generate dummy data if no data is fetched
+  // Dummy data if nothing is fetched
   const displayData = leaderboardData.length > 0 ? leaderboardData : Array(10).fill({
-    player_name: '-',
-    score: '-',
-    streak_count: '-',
-    date: '-'
+    name: '-',
+    Score: '-',
+    Streak: '-',
+    Date: '-'
   });
 
   return (
     <div className="font-['Inter']">
-      {/* Navbar */}
       <Navbar />
 
-      {/* Leaderboard Content */}
       <div className="w-full px-2 py-10">
         <h1 className="text-[#FF8847] text-5xl md:text-5xl font-bold text-center mb-12 font-['Poetsen_One']">
           LeaderBoard
@@ -66,10 +65,10 @@ function Leaderboard() {
                 <div className="w-16 md:w-24 text-center font-['Poetsen_One'] text-[#FF8847] text-2xl font-bold">
                   #{index + 1}
                 </div>
-                <div className="flex-1 text-center text-lg md:text-xl">{entry.player_name}</div>
-                <div className="flex-1 text-center text-lg md:text-xl">{entry.score}</div>
-                <div className="flex-1 text-center text-lg md:text-xl">{entry.streak_count}</div>
-                <div className="flex-1 text-center text-lg md:text-xl">{entry.date}</div>
+                <div className="flex-1 text-center text-lg md:text-xl">{entry.name}</div>
+                <div className="flex-1 text-center text-lg md:text-xl">{entry.Score}</div>
+                <div className="flex-1 text-center text-lg md:text-xl">{entry.Streak}</div>
+                <div className="flex-1 text-center text-lg md:text-xl">{entry.Date}</div>
               </div>
             ))}
 
