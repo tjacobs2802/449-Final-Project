@@ -188,8 +188,8 @@ const NutriScan = () => {
     return (
         <>
             <Navbar />
-
-            <form onSubmit={handleSubmit} className="max-w-md w-[350px] mx-auto bg-gray-50 shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <p className='poetsen-font text-4xl text-orange'>Input Food Label Data in One of the Following Options:</p>
+            <form onSubmit={handleSubmit} className="max-w-md w-[350px]  mx-auto bg-gray-50 shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div className="mb-4">
                     <Label className="block text-gray-700 text-sm font-bold mb-2">Entry Type</Label>
                     <Select value={entryType} onValueChange={setEntryType}>

@@ -13,16 +13,16 @@ function Landing() {
   return (
     <>
       <Navbar />
-      <h1>Track your health!</h1>
-      <h2>Track fitness, nutrition, and health goals by completing daily and weekly tasks for rewards!</h2>
+      <h1 className='text-orange poetsen-font'>Track your health!</h1>
+      <h2 className='text-pine font-bold'>Track fitness, nutrition, and health goals by completing daily and weekly tasks for rewards!</h2>
       <div className = "login-container">
-        <div className = "log-box">
+        <div className = "log-box text-lime">
         <h2>Login/Sign up</h2>
         <input type="text" placeholder="E-mail"/>
         <input type="text" placeholder="Username"/>
         <input type="password" placeholder = "Password"/>
-        <button>Login</button>
-        <button>Sign Up</button>
+        <button className='text-pine'>Login</button>
+        <button className='text-pine'>Sign Up</button>
         </div>
       </div>
 

@@ -9,6 +9,14 @@
   text-align: center;
 }
 
+.poetsen-font {
+  font-family: 'Poetsen One', sans-serif;
+}
+
+.inter-font {
+  font-family: 'Inter', sans-serif;
+}
+
 .login-container{
   display:flex;
   justify-content: center;
